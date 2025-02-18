@@ -153,12 +153,12 @@ public class FFmpegKitFlutterPlugin implements FlutterPlugin, ActivityAware, Met
         Log.d(LIBRARY_NAME, String.format("FFmpegKitFlutterPlugin created %s.", this));
     }
 
-    @Override   
-    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-        this.context = binding.getApplicationContext();
-        this.messenger = binding.getBinaryMessenger();
-        init(messenger, context, null, null);
-    }
+    // @Override   
+    // public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    //     this.context = binding.getApplicationContext();
+    //     this.messenger = binding.getBinaryMessenger();
+    //     init(messenger, context, null, null);
+    // }
 
     protected void registerGlobalCallbacks() {
         FFmpegKitConfig.enableFFmpegSessionCompleteCallback(this::emitSession);
@@ -191,7 +191,7 @@ public class FFmpegKitFlutterPlugin implements FlutterPlugin, ActivityAware, Met
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding activityPluginBinding) {
         Log.d(LIBRARY_NAME, String.format("FFmpegKitFlutterPlugin %s attached to activity %s.", this, activityPluginBinding.getActivity()));
-        init(flutterPluginBinding.getBinaryMessenger(), flutterPluginBinding.getApplicationContext(), activityPluginBinding.getActivity(), null, activityPluginBinding);
+        init(flutterPluginBinding.getBinaryMessenger(), flutterPluginBinding.getApplicationContext(), activityPluginBinding.getActivity(), activityPluginBinding);
     }
 
     @Override
@@ -643,8 +643,7 @@ public class FFmpegKitFlutterPlugin implements FlutterPlugin, ActivityAware, Met
         }
     }
 
-    protected void init(final BinaryMessenger messenger, final Context context, final Activity activity, 
-                    final ActivityPluginBinding activityBinding) {
+    protected void init(final BinaryMessenger messenger, final Context context, final Activity activity, final ActivityPluginBinding activityBinding) {
     registerGlobalCallbacks();
 
     if (methodChannel == null) {
